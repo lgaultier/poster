@@ -1,0 +1,526 @@
+%\documentclass[portrait,a0b,final,a4resizeable]{a0poster}
+\documentclass[portrait,a0b,final]{a0poster}
+%%% Option "a4resizeable" enables the poster to be resizable using the command: psresize -pa4 poster.ps poster-a4.ps
+%   with landscape option: psresize -W800 -H600 poster.ps poter-a4.ps
+%   and replace in "poster-a4.ps" the line:  
+%   %%BoundingBox: 0 0 2594 3402  with  %%BoundingBox: 0 0 600 800 
+%   For final printing, please remove option "a4resizeable" !!
+\usepackage{epsfig}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{pstricks,pst-grad}
+\usepackage{graphicx}
+\usepackage{amsbsy,amsmath}
+\usepackage{tikz} %add schemes
+\usetikzlibrary{shapes} %add diamonds shape to schemes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of some variables and colors %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\unnumberedcaption}%
+
+\newcommand{\BIBand}{and}
+
+\newcommand{\Deg}{$^{\circ} ~$}
+%\DeclareTextSymbol{\deg}{T1}{6}
+%\DeclareTextSymbol{\degre}{OT1}{23}
+
+\setlength{\bibsep}{0.0pt}
+\def\refname{\normalsize \bf References}
+%%\renewcommand{\rho}{\varrho}
+%%\renewcommand{\phi}{\varphi}
+%\setlength{\columnsep}{3cm}
+%\setlength{\columnseprule}{2mm}
+%\setlength{\parindent}{0.0cm}
+
+\renewcommand{\vec}{\underline}
+%\renewcommand{\rho}{\varrho}
+%\renewcommand{\phi}{\varphi}
+\setlength{\columnsep}{0.1cm}
+\setlength{\columnseprule}{0mm}
+\setlength{\parindent}{0.0cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%               Background                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\background}[3]{
+  \newrgbcolor{cgradbegin}{#1}
+  \newrgbcolor{cgradend}{#2}
+  \psframe[fillstyle=gradient,gradend=cgradend,
+  gradbegin=cgradbegin,gradmidpoint=#3](0.,0.)(1.\textwidth,-1.\textheight)
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                Poster                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{poster}{
+  \begin{center}
+  \begin{minipage}[c]{1.0\textwidth}
+}{
+  \end{minipage} 
+  \end{center}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pcolumn                       %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{pcolumn}[1]{
+  \begin{minipage}{#1\textwidth}
+%  \begin{center}
+}{
+%  \end{center}
+  \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pboxx                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+
+\newcommand{\pboxx}[4]{
+\begin{minipage}[t][#2][t]{#1}
+#4
+\end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pbox                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+
+\newcommand{\pbox}[4]{
+         \psshadowbox[#3]{
+            \begin{minipage}[t][#2][t]{#1} #4
+            \end{minipage}
+         }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pfig                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pfig - replacement for \figure
+% necessary, since in multicol-environment
+% \figure won't work
+
+\newcommand{\pfig}[3][0]{
+\begin{center}
+  \vspace{1cm}
+  \includegraphics[width=#3\hsize,angle=#1]{#2}
+  \nobreak\medskip
+\end{center}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pcaption                      %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pcaption - replacement for \caption
+% necessary, since in multicol-environment \figure and
+% therefore \caption won't work
+
+%\newcounter{figure}
+\setcounter{figure}{1}
+\newcommand{\pcaption}[1]{
+  \vspace{0.cm}
+  \begin{quote}
+    {{\sc Figure} \arabic{figure}: #1}
+  \end{quote}
+  \vspace{1cm}
+  \stepcounter{figure}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                myfig                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \myfig - replacement for \figure
+% necessary, since in multicol-environment 
+% \figure won't work
+
+\newcommand{\myfig}[3][0]{
+\begin{center}
+  \vspace{0.10cm}
+  \includegraphics[width=#3\hsize,angle=#1]{#2}
+%  \nobreak\medskip
+\end{center}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                mycaption                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \mycaption - replacement for \caption
+% necessary, since in multicol-environment \figure and
+% therefore \caption won't work
+
+%\newcounter{figure}
+\setcounter{figure}{1}
+\newcommand{\mycaption}[1]{
+  \vspace{0.0cm}
+  \begin{quote}
+    {\small{#1}}
+  \end{quote}
+  \vspace{0cm}
+  \stepcounter{figure}
+}
+
+
+% MES DEFINITIONS DES COULEURS:
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+\newrgbcolor{gradbegin}{0 0 0.8}
+\newrgbcolor{gradend}{1 1 1}
+\newrgbcolor{lightblue}{0. 0. 0.80}
+\newrgbcolor{lightyellow}{1 1 0.}
+\newrgbcolor{customcolor}{1 0.75 0.}
+\newrgbcolor{customcolor2}{1 0.5 0.}
+\newrgbcolor{customcolor3}{0 0.8 0.2}
+\newrgbcolor{white}{1. 1. 1.}
+\newrgbcolor{whiteblue}{.80 .80 1.}
+\newrgbcolor{mycyan}{.20 .60 .60}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\background{0.2 0.6 0.6}{1. 1. 1.}{0.5}
+
+\vspace*{2cm}
+
+%\newrgbcolor{lightblue}{0. 0. 0.80}
+%\newrgbcolor{white}{1. 1. 1.}
+%\newrgbcolor{whiteblue}{.80 .80 1.}
+
+%\newrgbcolor{darkred}{0.6 0 0}
+%\newrgbcolor{lightblue2}{0.2 0.2 1}
+%\newrgbcolor{lightblue}{0.5 0.5 1}
+%\newrgbcolor{white}{1. 1. 1.}
+%\newrgbcolor{whiteblue}{.80 .80 1.}
+%\newrgbcolor{mycyan}{rgb}{0.2,0.6,0.6}
+
+
+
+\begin{poster}
+%%%%%%%%%%%%%%%%%%%%%
+%%% Header
+%%%%%%%%%%%%%%%%%%%%%
+ \begin{center}
+ \begin{pcolumn}{0.99}
+ \begin{center}
+   \pbox{0.95\textwidth}{}{linewidth=2mm,framearc=0.3,linecolor=mycyan,shadowcolor=white,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+ 
+%%% Logo LPO
+  \begin{minipage}[l][9cm][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo_cnrs.eps}
+    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo_cnes2.eps}
+  \end{center}
+  \end{minipage}
+%%% Titre
+  \begin{minipage}[c][9cm][c]{0.78\textwidth}
+  \begin{center}
+     {\sc \huge \bf On the inversion of sub-mesoscale information to correct mesoscale velocity}\\[10mm]
+     {\Large Lucile Gaultier$^{1}$, Jacques Verron$^{1}$, Jean-Michel Brankart$^{1}$, Olivier Titaud$^{1}$ and Pierre Brasseur$^{1}$} \\[5mm]
+     {\large {$^{1}$ \it Laboratoire des Ecoulements G\'eophysiques et Industriels, UMR 5519, CNRS and Universit\'e de Grenoble, Grenoble, France} %\\
+%     %{$^{2}$ \it Departement of Oceanography, The Florida State University, Tallahassee, USA}\\
+     }
+ 
+  \end{center}
+  \end{minipage}
+%%% Logo-UBO
+  \begin{minipage}[r][9cm][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth,angle=0]{./pict/logo_meom.eps}
+    \includegraphics[width=0.8\textwidth,angle=0]{./pict/logo_legi.eps}
+  \end{center}
+  \end{minipage}
+ 
+  }  %pbox
+\end{center}
+\end{pcolumn}
+\end{center}
+ 
+ 
+%\vspace*{2cm}
+ 
+%%% Begin of Multicols-Environment
+\begin{multicols}{2}
+ 
+ \newcommand{\etal}{{\it et al.}}
+ \newcommand{\DegN}{$^{\circ}$N~}
+ \newcommand{\DegW}{$^{\circ}$W~}
+ \newcommand{\DegE}{$^{\circ}$E~}
+ \newcommand{\DegS}{$^{\circ}$S~}
+ 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%% Introduction
+ \begin{center}
+% \begin{pcolumn}{0.32}
+   \pbox{0.92\columnwidth}{30cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=1.0,framesep=1em}{
+   \begin{center} 
+     { \bf \Large CONTEXT \\[5mm]}%MOTIVATIONS 
+   \end{center}
+   {\large
+ 
+   This poster reports on the correction of mesoscale altimetric observation using sub-mesoscale tracer information. 
+   Altimetric satellites provides one map a week at a mesoscale resolution (more than 1/8\Deg) whereas tracer sensors have a fine resolution in space (as low as few hundred meters) and time (a map a week).
+   Tracer observation can compensate for the lack of resolution in space and time of Altimetric data, if we can extract dynamic information from the tracer image. 
+   Some studies brought to light the connection between mesoscale velocities and tracer patterns% \citep{Dovidio2004, Lehahn2007}, 
+but correcting mesoscale velocity using tracers has never been done before. We present in here the strategy we made up to correct mesoscale altimetric velocity using a tracer image.
+   \begin{center}
+   \begin{tikzpicture}
+    \node[color=blue, text width=10cm, text centered] (UV) at (16,6.8) {Mesoscale field};
+    \node[color=black, text width=09.73cm, text centered] (pUV) at (16,0.48) {
+        \includegraphics[width=1\linewidth]{pict/aviso_20079_tas.eps}};
+    \node[color=black, text width=15cm, text centered] (cUV) at (16,-7) {\small{Velocity map, Tasmania region, December 22, 2004}};
+%        \mycaption{Velocity map, Tasmania region, December 22, 2004}
+%         };
+    \node[color=green, text width=15cm, text centered] (TRA) at (0,6.7) {Sub-mesoscale tracer image};
+    \node[color=black, text width=10cm, text centered] (pTRA) at (0,0) {
+        \includegraphics[width=1\linewidth]{pict/A2004358041000_L2_LAC_OC.eps}};
+    \node[color=black, text width=15cm, text centered] (cUV) at (0,-7) {\small{Chlorophyll, Tasmania region, December 22, 2004}};
+%        \mycaption{Chlorophyll, Tasmania region, December 22, 2004}
+ %      };
+    \node[draw] (int) at (8,2.1) {\large{?}};
+%  \draw[arrows={triangle 45-triangle 45}] (pTRA)--(16,0);
+  \draw[->] (pTRA)--(10,0);
+  \end{tikzpicture}\\ 
+$\Rightarrow$Use of FSLE as a go-between variable to enable the velocity field and the tracer image to discuss together
+
+  \end{center}
+   } %large
+   } %pbox
+% gend{pcolumn}
+ \end{center}
+ 
+ \vspace*{0.1cm}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{center}
+% \begin{pcolumn}{0.32}
+   \pbox{0.92\columnwidth}{30cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+   \begin{center}
+     {\sc \bf \Large TEST CASE\\[5mm]} 
+   \end{center} 
+ 
+   \vspace*{0.2cm}
+ 
+   {\large
+    \fbox{
+  \begin{minipage}{0.49\linewidth}
+     \myfig[0]{./pict/aviso_h_019547_eof.eps}{0.8}
+     \small{SSH (in cm) in the Western Basin of the Mediterranean Sea. The test case is located in the purple rectangle}
+   \end{minipage}
+    }
+   \begin{minipage}{0.49\linewidth}
+ The chosen area is located in the Western basin of the Mediterranean Sea (from 38.2\DegN to 40\DegN and from 4.8\DegE to 8\DegE).
+It has been chosen because of the strong filament signature. The study date, July 2$^{nd}$, 2004 is selected so that there is no cloud on our area and also because of the presence of a neat gyre on the SST image. %The date of the velocity is June 30$^{th}$, 2004. It is chosen to be the available AVISO velocity field as close as possible to the study day.
+   \end{minipage}
+   \vfill
+%\vspace{0.8cm}
+Two satellite observation data sets are considered: \\ 
+\vfill 
+%    \vspace{8mm}
+    \begin{tabular}{|p{20cm}|p{20cm}|}
+      \hline
+       High resolution SST images from MODIS sensor at a resolution of 1 km: & 
+       Maps of velocity derived from AVISO altimetric observations at a resolution of 1/8\Deg: \\ 
+      \hline
+       \myfig[0]{./pict/A2004184123500_L2_LAC_SST.eps}{0.6} 
+       \small{SST observation from MODIS sensor (in \Deg C) on July 2$^{nd}$, 2004} &
+       \myfig[0]{./pict/aviso_velmap19904_med.eps}{0.6} 
+       \small{Geostrophic Velocity (in m.s$^{-1}$) over the SSH (in cm) on the day June 30$^{th}$, 2004 from AVISO mapped products} \\ 
+       \hline
+%       \mycaption{SST observation from MODIS sensor (in \Deg C) on July 2$^{nd}$, 2004} &
+%       \mycaption{Geostrophic Velocity (in m.s$^{-1}$) over the SSH (in cm) on the day June 30$^{th}$, 2004 from AVISO mapped products} \\ 
+%        \hline
+     \end{tabular}
+%The direct measure of the distance between \textbf{u} and tracer is not possible
+%$\rightarrow$ We use Finite-Size Lyapunov Exponents (FSLE) as a go-between variable
+
+%\begin{tabular}{cc}
+%     1 &e \\
+%     2 & e \\
+%\eend{tabular}
+
+%    \vline
+ %   \begin{minipage}{0.49\linewidth}
+%       Maps of velocity derived from AVISO altimetric observations at a resolution of 1/8\Deg.
+%       \fbox{
+%        \myfig[0]{./pict/aviso_velmap19904_med.eps}{0.6}
+%        \mycaption{Geostrophic Velocity (in m.s$^{-1}$) over the SSH (in cm) on the day June 30$^{th}$, 2004 from AVISO mapped products}
+%        }
+%     \end{minipage}
+
+%\begin{enumerate}
+%\item High resolution Sea Surface Temperature (SST) images from MODIS sensor at a resolution of 1 km.
+%\item Maps of velocity derived from AVISO altimetric observations at a resolution of 1/8\Deg.
+%\end{enumerate}
+%   \fbox{
+%  \begin{minipage}{0.49\linewidth}
+%     \myfig[0]{./pict/aviso_h_019547_eof.eps}{0.8}
+    % \mycaption{SSH (in cm) in the Western Basin of the Mediterranean Sea. The test case is located in the purple rectangle}
+%   \end{minipage}
+%    }
+%   \begin{minipage}{0.49\linewidth}
+% The chosen area is located in the Western basin of the Mediterranean Sea (from 38.2\DegN to 40\DegN and from 4.8\DegE to 8\DegE).
+%It has been chosen because of the strong filament signature. The study date, July 2$^{nd}$, 2004 is selected so that there is no cloud on our area and also because of the presence of a neat gyre on the SST image. %The date of the velocity is June 30$^{th}$, 2004. It is chosen to be the available AVISO velocity field as close as possible to the study day.
+%   \end{minipage}
+
+
+ %\myfig[0]{./figures/2mld_compare.eps}{0.6}
+ %\pcaption{Mixed Layer Depth in North Atlantic (march 2009 monthly mean) in ORCA025.L75-MJM91b (left) and ORCA025.L75-MJM95 (right)}       
+  
+         
+ %\myfig[0]{./figures/tao_profiles.ORCA025.L75-MJM91b_ORCA025.L75-MJM95.eps}{0.6}
+ %\pcaption{TAO profiles (year 2009 annual mean) in ORCA025.L75-MJM91b (red) and ORCA025.L75-MJM95 (black) compared to climatological data} 
+ 
+ 
+   } %large
+   } %pbox
+% \end{pcolumn}
+ \end{center}
+ 
+%\vspace*{0.2cm}
+\end{multicols}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{center}
+   \pbox{0.95\columnwidth}{30cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+   \begin{center}
+     {\sc \bf \Large METHOD \\[5mm]}
+   \end{center} 
+   {\large
+       
+    \begin{pcolumn}{0.32}
+    \begin{center}{\bf Finite-Size Lyapunov Exponents (FSLE)} \end{center}
+    
+     $\bullet$ FSLE measure stirring in a fluid, It is a connection between
+sub-mesoscale dynamics and biologic stirring.\\ 
+     $\bullet$ FSLE is the exponential rate at which two particles separate from a distance $\delta_0$ to $\delta_f$:
+%\begin{equation*}
+$$ \lambda=\frac{1}{\tau}\ln{\frac{\delta_f}{\delta_0}}$$
+%% \label{lyap}
+%\end{equation*}
+      The particles are advected backward in time so that maximum lines of FSLE represent the unstable manifolds.
+     \myfig{./pict/fsle_48_stat_reg_19904_med.eps}{0.6}
+     \small{FSLE (in day$^{-1}$) derived from the geostrophic AVISO velocity on the day June 30$^{th}$, 2004} 
+
+    \end{pcolumn}            
+    \vline 
+    \begin{pcolumn}{0.32}
+    \begin{center}{\bf Maximum Probability Estimator} \end{center}
+      Explore subspace of error\\ 
+    Cost function 
+$$J({\bf u}) = \mu \; || \hat{\lambda}_o - \hat{\lambda}({\bf u}) ||^2
+             +  ( {\bf u} - {\bf u}_b )^T  {\bf B}^{-1}
+                ( {\bf u} - {\bf u}_b )$$ 
+    Simulated Annealing\\
+    \end{pcolumn}
+    \vline
+    \begin{pcolumn}{0.32}
+    \begin{center}{\bf Minimum Variance Estimator} \end{center}
+     Gibbs'Sampling\\ 
+     Rejection algo\\ 
+    \end{pcolumn}
+    
+
+ %  \myfig[0]{./figures/glo_change_inS.eps}{0.33}
+ %  \pcaption{Global change in salinity (compared to levitus) along depth in 2009 in MJM91b (black, no restoring at all), MJM95 (red),MAL951 (green), MAL952 (cyan), MAL953 (magenta)} 
+  
+ 
+   } %large
+   } %pbox
+ 
+ \end{center}
+ 
+%\vspace*{0.2cm}
+ 
+\begin{multicols}{2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{center}
+   \pbox{0.9\columnwidth}{30cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+   \begin{center}
+     {\sc \bf \Large SENSITIVITY STUDY \\[5mm]}
+   \end{center} 
+   {\large
+ 
+   \begin{center}
+   \begin{minipage}{0.49\linewidth}
+ 
+ %    \myfig[0]{./figures/logT_temp_bio.eps}{0.8}
+ %    \pcaption{Global temperature drifts after 10 years of run in ORCA025-G84 (red) and ORCA025-G84NB (black)} 
+ TTTTTTTTTTT
+   \end{minipage}
+   \hfill
+   \begin{minipage}{0.49\linewidth}
+ 
+ %  \myfig[0]{./figures/map_diff_temp_bio.eps}{0.9}
+ %  \pcaption{Temperature difference between ORCA025-G84 and ORCA025-G84NB at 50 meters}   
+ TTTTT
+   \end{minipage}
+   \end{center}
+ 
+   } %Large
+   } %pbox
+ \end{center}
+ 
+ %\vspace*{0.2cm}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \begin{center}
+   \pbox{0.9\columnwidth}{30cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+   \begin{center}{\sc \bf \Large  RESULTS} \end{center}
+     {\large
+ 
+ bla bla
+ 
+ 
+ }
+ }
+ \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%%% Conclusion
+ %\begin{center}
+ %\pbox{.9\columnwidth}{}{linewidth=1mm,framearc=0,linecolor=white,
+ %  fillstyle=gradient,gradangle=0,gradbegin=white,gradend=lightblue,
+ %  gradmidpoint=1.0,framesep=1em}{
+ %  \begin{center}{\sc \bf \Large  CONCLUSIONS} \end{center}
+ %    {\large
+ %
+ %bla bla
+ %
+ %
+ %}
+ %}
+ %\end{center}
+ 
+ 
+%%BIBLIO
+ {\tiny
+ \bibliographystyle{./bst/jpo.bst}
+ \bibliography{../biblio/biblio_th}
+ }
+ 
+ 
+\end{multicols}
+\begin{center}
+ 
+  {\bf Laboratoire des Ecoulements G\'eophysiques et Industriels, 
+1023 rue de la piscine, Domaine Universitaire, 38400 Saint Martin d'Heres, FRANCE 
+e-mail: lucile.gaultier@hmg.inpg.fr}
+\end{center}
+ 
+\end{poster}
+\end{document}
