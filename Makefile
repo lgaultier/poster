@@ -1,11 +1,11 @@
-poster.pdf : poster.tex
+OSTST : poster_OSTST2012.tex
 	@echo "compile poster"
-	@latex poster.tex
-#	@bibtex poster
-	@latex poster.tex
-	@latex poster.tex
+	@latex poster_OSTST2012.tex
+	@bibtex poster_OSTST2012
+	@latex poster_OSTST2012.tex
+	@latex poster_OSTST2012.tex
 	@echo "export in pdf"
-	@dvipdf poster.dvi poster.pdf
+	@dvipdf poster_OSTST2012.dvi OSTST2012.pdf
 	@echo "delete compilation files"
 	@rm -f *.aux *.bbl *.blg *.dvi *.log
 #	@mv poster.pdf poster_JC2.pdf 
