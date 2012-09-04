@@ -1,4 +1,4 @@
-\documentclass[portrait,a0b,final,a4resizeable]{a0poster}
+\documentclass[portrait,a0,final,a4resizeable]{a0poster}
 %\documentclass[portrait,a0b,final]{a0poster}
 %%% Option "a4resizeable" enables the poster to be resizable using the command: psresize -pa4 poster.ps poster-a4.ps
 %   with landscape option: psresize -W800 -H600 poster.ps poter-a4.ps
@@ -223,15 +223,15 @@
 %%% Logo
   \begin{minipage}[l][9cm][c]{0.1\textwidth}
   \begin{center}
-%    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo_cnrs.eps}
-%    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo_cnes2.eps}
+    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo/logo_cnrs.eps}
+    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo/logo_cnes2.eps}
   \end{center}
   \end{minipage}
 %%% Titre
   \begin{minipage}[c][9cm][c]{0.78\textwidth}
   \begin{center}
-    {\sc \huge \bf On the inversion of sub-mesoscale information to correct mesoscale velocity}\\[10mm]
-    {\Large Lucile Gaultier$^{1}$, Jacques Verron$^{1}$, Jean-Michel Brankart$^{1}$, Olivier Titaud$^{1}$ and Pierre Brasseur$^{1}$} \\[5mm]
+    {\sc \huge \bf On the Joint Use of High Resolution Tracer Images and Altimetric Data for the Control of Ocean Circulations}\\[10mm]
+    {\Large Lucile Gaultier$^{1}$, Jacques Verron$^{1}$, Jean-Michel Brankart$^{1}$ and Pierre Brasseur$^{1}$} \\[5mm]
     {\large {$^{1}$ \it Laboratoire des Ecoulements G\'eophysiques et Industriels, UMR 5519, CNRS, Grenoble, France} %\\
 %     %{$^{2}$ \it Departement of Oceanography, The Florida State University, Tallahassee, USA}\\
     } 
@@ -240,8 +240,8 @@
 %%%Logo
   \begin{minipage}[r][9cm][c]{0.1\textwidth}
   \begin{center}
-   % \includegraphics[width=0.8\textwidth,angle=0]{./pict/logo_meom.eps}
-   % \includegraphics[width=0.8\textwidth,angle=0]{./pict/logo_legi.eps}
+    \includegraphics[width=0.8\textwidth,angle=0]{./pict/logo/logo_meom.eps}
+    \includegraphics[width=0.8\textwidth,angle=0]{./pict/logo/logo_legi.eps}
   \end{center}
   \end{minipage} 
   }  %pbox
@@ -276,25 +276,25 @@
       \end{center}
       \ding{226} Some studies brought to light the connection between mesoscale velocities and tracer patterns \citep{Dovidio2004, Lehahn2007}, but correcting mesoscale velocities using tracer images has never been done before.
 %%%   \begin{center}
-%      \begin{tikzpicture}
+      \begin{tikzpicture}
 %%%    \node[color=blue, text width=10cm, text centered] (UV) at (16,6.8) {Mesoscale field};
-   % %    \node[color=black, text width=09.73cm, text centered] (pUV) at (16,0.48) {
-   % %    \includegraphics[width=1\linewidth]{pict/aviso_20079_tas.eps}};
-   %     \node[color=black, text width=20cm, text centered] (cUV) at (17,-6.) {\small{Velocity map, Tasmania region, December 22, 2004}};
+        \node[color=black, text width=09.73cm, text centered] (pUV) at (16,0.48) {
+        \includegraphics[width=1\linewidth]{pict/aviso_20079_tas.eps}};
+        \node[color=black, text width=20cm, text centered] (cUV) at (17,-6.) {\small{Velocity map, Tasmania region, December 22, 2004}};
 %%%        \mycaption{Velocity map, Tasmania region, December 22, 2004}
 %%%         };
-%% %   \node[color=green, text width=15cm, text centered] (TRA) at (0,6.7) {Sub-mesoscale tracer image};
-  % %     \node[color=black, text width=10cm, text centered] (pTRA) at (0,0) {
-  % %     \includegraphics[width=1\linewidth]{pict/A2004358041000_L2_LAC_OC.eps}};
-   %     \node[color=black, text width=20cm, text centered] (cUV) at (0,-6.) {\small{Chlorophyll, Tasmania region, December 22, 2004}};
-%%        \mycaption{Chlorophyll, Tasmania region, December 22, 2004}
- %%      };
- %       \node[draw] (int) at (8,2.1) {\large{?}};
-%%  \draw[arrows={triangle 45-triangle 45}] (pTRA)--(16,0);
-%%  \draw[->, thick,double distance=4pt , >=stealth] (pTRA)--(10,0);
- %       \draw[->, very thick, >=stealth] (pTRA)--(10,0);
- %     \end{tikzpicture}\\ 
-      %\ding{226} 
+%%    \node[color=green, text width=15cm, text centered] (TRA) at (0,6.7) {Sub-mesoscale tracer image};
+       \node[color=black, text width=10cm, text centered] (pTRA) at (0,0) {
+       \includegraphics[width=1\linewidth]{pict/A2004358041000_L2_LAC_OC.eps}};
+        \node[color=black, text width=20cm, text centered] (cUV) at (0,-6.) {\small{Chlorophyll, Tasmania region, December 22, 2004}};
+%        \mycaption{Chlorophyll, Tasmania region, December 22, 2004}
+ %      };
+        \node[draw] (int) at (8,2.1) {\large{?}};
+%  \draw[arrows={triangle 45-triangle 45}] (pTRA)--(16,0);
+%  \draw[->, thick,double distance=4pt , >=stealth] (pTRA)--(10,0);
+        \draw[->, very thick, >=stealth] (pTRA)--(10,0);
+      \end{tikzpicture}\\ 
+      \ding{226} 
       The tracer and the velocity are physically different, $\rightarrow$ use Finite-Size Lyapunov Exponents (FSLE) as a go-between variable.
 
     } %large
@@ -312,17 +312,23 @@
     \vspace*{0.2cm}
     {\large
     \begin{tikzpicture}
-   % \node[color=black, text width=09.73cm, text centered] (ptra) at (16,0.48) {
-   % \includegraphics[width=1\linewidth]{}};
-    
+    \node[color=black, text width=08.73cm, text centered] (ptra) at (10,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/chl_L2_LAC_2006360_s_atl_HR.eps}};
+    \node[color=black, text width=08.73cm, text centered] (puv) at (16,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_20471_s_atl2_.eps}};
+    \node[color=black, text width=08.73cm, text centered] (ph) at (20,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_h_020471_bin0.eps}};
+    \draw[->, very thick, >=stealth] (ph)--(puv) ;
 
+    \node[color=black, text width=08.73cm, text centered] (ptra) at (10,-10) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/chl_L2_LAC_2006360_s_atl_HR.eps}};
+    \node[color=black, text width=08.73cm, text centered] (puv) at (16,-10) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_20471_s_atl2_.eps}};
+
+
+    \node[draw,color=blue, text width=10cm, text centered] (J) at (16,-15) {Cost function};
+    \node[color=black, text width=10cm, text centered] (fJ) at (16,-17) {$$J=\| I_{obs} - I_{FSLE}(u)\|$$ +background term};
     \end{tikzpicture} \\
-Bla\\Bla\\Bla\\Bla\\
-Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\ Bla\\Bla\\Bla\\Bla\\
-Bla\\Bla\\Bla\\Bla\\Bla\\ Bla\\Bla\\ 
-Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\Bla\\
-Bla\\Bla\\ Bla\\
-Bla\\ 
    } %large
   } %pbox
 \end{center}
