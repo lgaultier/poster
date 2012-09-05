@@ -312,23 +312,32 @@
     \vspace*{0.2cm}
     {\large
     \begin{tikzpicture}
-    \node[color=black, text width=08.73cm, text centered] (ptra) at (10,5.48) {
-    \includegraphics[width=1\linewidth]{./pict/s_atl/chl_L2_LAC_2006360_s_atl_HR.eps}};
-    \node[color=black, text width=08.73cm, text centered] (puv) at (16,5.48) {
-    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_20471_s_atl2_.eps}};
-    \node[color=black, text width=08.73cm, text centered] (ph) at (20,5.48) {
+    \node[color=black, text width=10.73cm, text centered] (ptra) at (10,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/chl2006019.eps}};
+    \node[color=black, text width=08.73cm, text centered] (ptra) at (20,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/sst_20471_small.eps}};
+    \node[color=black, text width=08.00cm, text centered] (puv) at (30,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_20471_s_atl2_oc.eps}};
+    \node[color=black, text width=08.73cm, text centered] (ph) at (40,5.48) {
     \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_h_020471_bin0.eps}};
     \draw[->, very thick, >=stealth] (ph)--(puv) ;
 
     \node[color=black, text width=08.73cm, text centered] (ptra) at (10,-10) {
-    \includegraphics[width=1\linewidth]{./pict/s_atl/chl_L2_LAC_2006360_s_atl_HR.eps}};
+    \includegraphics[width=1\linewidth]{./pict/s_atl/sst_20471_small.eps}};
     \node[color=black, text width=08.73cm, text centered] (puv) at (16,-10) {
-    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_20471_s_atl2_.eps}};
+    \includegraphics[width=1\linewidth]{./pict/s_atl/fsle_48_stat_reg_20471__bin0.eps}};
 
 
     \node[draw,color=blue, text width=10cm, text centered] (J) at (16,-15) {Cost function};
     \node[color=black, text width=10cm, text centered] (fJ) at (16,-17) {$$J=\| I_{obs} - I_{FSLE}(u)\|$$ +background term};
     \end{tikzpicture} \\
+
+%    & \includegraphics[width=2.75cm]{./pict/aviso_h_020471_bin0.png}
+%    & \includegraphics[width=2.35cm]{./pict/aviso_20471_s_atl2_oc.png}
+%    & \includegraphics[width=2.75cm]{./pict/fsle_48_stat_reg_20471__bin0.png}
+%    & \alt<2>{\includegraphics[width=2.73cm]{./pict/chl2006019.png}}
+%      {\includegraphics[width=2.75cm]{./pict/sst_20471_small.png}}
+
    } %large
   } %pbox
 \end{center}
