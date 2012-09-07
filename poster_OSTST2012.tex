@@ -15,6 +15,7 @@
 \usetikzlibrary{shapes} %add diamonds shape to schemes
 \usepackage{pifont} %to use arrows
 \usepackage{array} %vertically centered cells in tabular
+\usepackage{verbatim} % to enable comments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Definition of some variables and colors %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -269,12 +270,12 @@
       { \bf \Large CONTEXT \\[5mm]}%MOTIVATIONS 
     \end{center}
     {\large
-      \ding{226} Lack of resolution in time and space for altimetrice Data. Observation of the submesoscale resolution ($\simeq$ 50~km) not possible
-      \ding{226} Submesoscale filaments can be observed using tracer sensors (SST or Ocean Color image). Resolution of image as low as 200 m and a map a day. 
+      \ding{52} Lack of resolution in time and space for altimetrice Data $\rightarrow$ Observation of the submesoscale resolution ($\simeq$ 50~km) not possible
+      \ding{52} Submesoscale filaments can be observed using tracer sensors (SST or Ocean Color image, resolution of image as low as 200 m and a map a day)
       \begin{center}
       \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=mycyan,gradend=mycyan, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ \bf How to correct altimetric mesoscale velocity using sub-mesoscale tracer observations from space? }
       \end{center}
-      \ding{226} Some studies brought to light the connection between mesoscale velocities and tracer patterns \citep{Dovidio2004, Lehahn2007}, but correcting mesoscale velocities using tracer images has never been done before.
+      \ding{52} Some studies brought to light the connection between mesoscale velocities and tracer patterns \citep{Dovidio2004, Lehahn2007}, but correcting mesoscale velocities using tracer images has never been done before.
 %%%   \begin{center}
       \begin{tikzpicture}
 %%%    \node[color=blue, text width=10cm, text centered] (UV) at (16,6.8) {Mesoscale field};
@@ -292,9 +293,9 @@
         \node[draw] (int) at (8,2.1) {\large{?}};
 %  \draw[arrows={triangle 45-triangle 45}] (pTRA)--(16,0);
 %  \draw[->, thick,double distance=4pt , >=stealth] (pTRA)--(10,0);
-        \draw[->, very thick, >=stealth] (pTRA)--(10,0);
+        \draw[->, ultra thick, >=latex] (pTRA)--(10,0);
       \end{tikzpicture}\\ 
-      \ding{226} 
+      \ding{52} 
       The tracer and the velocity are physically different, $\rightarrow$ use Finite-Size Lyapunov Exponents (FSLE) as a go-between variable.
 
     } %large
@@ -307,11 +308,12 @@
 \begin{center}
   \pbox{0.90\columnwidth}{55cm}{linewidth=2mm, framearc=0.1, linecolor=mycyan, fillstyle=gradient, gradangle=0, gradbegin=white, gradend=white, gradmidpoint=1.0, framesep=1em}{
     \begin{center}
-      {\sc \bf \Large METHOD\\[5mm]}
+      {\sc \bf \Large DATA IMAGE ASSILATION\\[5mm]}
     \end{center}
     \vspace*{0.2cm}
     {\large
-    \begin{tikzpicture}
+
+\iffalse
     \node[color=black, text width=10.73cm, text centered] (ptra) at (10,5.48) {
     \includegraphics[width=1\linewidth]{./pict/s_atl/chl2006019.eps}};
     \node[color=black, text width=08.73cm, text centered] (ptra) at (20,5.48) {
@@ -330,7 +332,60 @@
 
     \node[draw,color=blue, text width=10cm, text centered] (J) at (16,-15) {Cost function};
     \node[color=black, text width=10cm, text centered] (fJ) at (16,-17) {$$J=\| I_{obs} - I_{FSLE}(u)\|$$ +background term};
+\fi
+    \begin{tikzpicture}
+    \tikzset{pname/.style={draw,rectangle,rounded corners=6pt},text centered,color=black}
+    \tikzstyle{fleche}=[->,>=latex,line width=1.6mm]
+    \node[pname,text width=7cm] (OBS) at (9,3.98) {Observations};
+    \node[pname,text width=7cm] (IM) at (9,-6.08) {Image};
+    \draw[fleche] (OBS)--(IM);
+    \draw[dashed,line width=0.5mm] (13.75,6.98)--(13.75,-7.1);
+
+    \node[pname,text width=10cm] (TRA) at (20.5,6.48) {Biogeochemical tracer};
+    \node[pname,text width=10cm] (DYN) at (32.5,6.48) {Dynamic};
+    \draw[dashed,line width=0.5mm] (26.5,6.98)--(26.5,-7.1);
+    \node[pname,text width=10cm] (OBSTRA) at (20.5,2.08) {MODIS observation of Sea Surface Temperature and/or Chlorophylle};
+    \node[pname,text width=10cm] (OBSSSH) at (32.5,3.38) {Sea Surface Height from Altimetry};
+    \node[pname,text width=10cm] (OBSUV) at (32.5,-1.08) {Corresponding geostrophic velocity $\vec{u}$};
+    \draw[fleche] (OBSSSH)--(OBSUV);
+
+    \node[pname, text width=10cm] (IMTRA) at (20.5,-5.88) {Image of tracer filaments $I_{tracer}$};
+    \node[pname,text width=10cm] (IMDYN) at (32.5,-5.88) {Image of FSLE $I_{FSLE}(\vec{u})$};
+    \draw[fleche] (OBSTRA)--(IMTRA);
+    \draw[fleche] (OBSUV)--(IMDYN);
+   
+   \node[pname, text width=30cm] (J) at (26.5,-11.08) {COST FUNCTION: $J(\vec{u})=\|I_{tracer}- I_{FSLE}(\vec{u})\| + background\ term$};
+   \draw[fleche] (IMTRA)--(J);
+   \draw[fleche] (IMDYN)--(J);
     \end{tikzpicture} \\
+
+\begin{center}
+  \pbox{0.85\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=mycyan,gradend=mycyan, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{Goal: Find the optimal velocity $\vec{u}$ that minimizes the cost function J.} 
+\end{center}
+  }
+    \begin{center}
+      {\sc \bf \Large METHOD \\[5mm]}
+    \end{center}
+    \vspace*{0.2cm}
+    {\large
+See \cite{Gaultier2012} for details about the method. 
+  
+  \ding{52} Compute a subspace of error to perturb the velocity \\
+  \ding{52} Explore the subspace of error \\
+  \ding{52} Use a simulated annealing algorithm to decrease the cost function: \\
+Initialisation: \\
+Background velocity $\vec{u_b}$: Velocity map derived from AVISO observation\\
+Cost function: Distance between AVISO velocity and tracer observation\\
+Loop: \\
+Perturb the velocity: $\vec{u_p}=\vec{u} + \delta \vec{u}$ \\
+Compute the cost function $J(\vec{u_p})$ and the variation of the cost function $\deltaJ=J(\vec{u})-J(\vec{u_p})$ \\
+  \ding{226}  If $\deltaJ \leqslant 0$ $\rigtharrow$ Accept perturbation ($\vec{u}=\vec{u_p}$) \\
+  \ding{226} If $\delta J\seqslant 0$ $\rigtharrow$ Accept perturbation with probability $e^{-\frac{\deltaJ}{T}}$ \\
+Exit when a minimum of the cost function is reached. \\
+
+  \ding{52} Use a Gibbs Sampler to assess possible solution around the minimum of the cost function\\ 
+
+
 
 %    & \includegraphics[width=2.75cm]{./pict/aviso_h_020471_bin0.png}
 %    & \includegraphics[width=2.35cm]{./pict/aviso_20471_s_atl2_oc.png}
@@ -392,11 +447,11 @@ SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
      \begin{center}
       \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=mycyan, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ We succeeded in correcting an altimetric mesoscale velocity field using a sub-mesoscale tracer observation from space }
       \end{center}
-      \ding{226} The corrected velocity is more consistent with the tracer field than the observed one, and the incertitude on this result is small. 
+      \ding{52} The corrected velocity is more consistent with the tracer field than the observed one, and the incertitude on this result is small. 
        However, the method still needs to be improved, since some areas of the velocity field are not accurately corrected. \\    
-      \ding{226} We plan on using a high resolution model to refine the method. 
+      \ding{52} We plan on using a high resolution model to refine the method. 
       Indeed, knowing the true sub-mesoscale velocity, we can assess accurately how much the corrected velocity is a better match to the tracer than the mesoscale `observed' velocity. \\ 
-      \ding{226} This study opens the way for the use of very high resolution altimeter data (in the context of SWOT and SARAL projects). The strategy proposed in here enables us to handle huge amount of data in models. 
+      \ding{52} This study opens the way for the use of very high resolution altimeter data (in the context of SWOT and SARAL projects). The strategy proposed in here enables us to handle huge amount of data in models. 
 %%PROSPECTS: Full DA on a physico biogeochemical model \\
 %%                 Learn to deal with HR image and huge data set to think ahead SWOT and SARAL missions. \\ 
    
@@ -418,9 +473,9 @@ SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
 %      \vspace{1cm}
 %      \begin{center}{\bf Finite-Size Lyapunov Exponents (FSLE)} \end{center}
     
-%      \ding{226} FSLE measure stirring in a fluid, It is a connection between
+%      \ding{52} FSLE measure stirring in a fluid, It is a connection between
 %sub-mesoscale dynamics and biologic stirring.\\ 
-%      \ding{226} FSLE is the exponential rate at which two particles separate from a distance $\delta_0$ to $\delta_f$:
+%      \ding{52} FSLE is the exponential rate at which two particles separate from a distance $\delta_0$ to $\delta_f$:
 %%\begin{equation*}
 %      $ \lambda=\frac{1}{\tau}\ln{\frac{\delta_f}{\delta_0}}$. \\ 
 %% \label{lyap}
@@ -443,7 +498,7 @@ SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
 %      \vspace{1em}
 
 %      \vfill
-%      \ding{226} We want to find the FSLE field as close as possible to the normalized tracer gradient. Therefore, the FSLE field and the normalized SST gradients are binarized in order to compare those two physically different variables. 
+%      \ding{52} We want to find the FSLE field as close as possible to the normalized tracer gradient. Therefore, the FSLE field and the normalized SST gradients are binarized in order to compare those two physically different variables. 
 %        $$\hat{\lambda}=
 %   \left \{
 %   \begin{array}{r r r}
@@ -456,7 +511,7 @@ SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
 %    \begin{pcolumn}{0.32}
 %      \vspace{1cm}
 %      \begin{center}{\bf The Cost Function} \end{center}
-%      \ding{226}The cost function $J$ measures the distance between the binarized normalized gradient of SST $\hat{\lambda}_o$ and the binarized FSLE $\hat{\lambda}({\bf u})$ (as a proxy of the velocity ${\bf u}$). 
+%      \ding{52}The cost function $J$ measures the distance between the binarized normalized gradient of SST $\hat{\lambda}_o$ and the binarized FSLE $\hat{\lambda}({\bf u})$ (as a proxy of the velocity ${\bf u}$). 
 %A background term is added so that the corrections applied on the velocity are small.
 %%It also takes into account the fact that the corrected velocity should not be too far from the background velocity
 %      $$J({\bf u}) = \mu \; || \hat{\lambda}_o - \hat{\lambda}({\bf u}) ||^2+\ background \ term$$
@@ -480,7 +535,7 @@ SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
 %      \end{center}
 %      \vspace{1em}
 
-%      \ding{226} We create a velocity panel using Principal Component Analysis with an ensemble of velocities. \\ 
+%      \ding{52} We create a velocity panel using Principal Component Analysis with an ensemble of velocities. \\ 
 %      Let S = $|u^{(1)}, u^{(2)}, ..., u^{(r)}|$ be the first r EOFs. 
 %      We consider velocity errors with zero mean and covariance of the ensemble of velocities $S$: $\delta u \sim \mathcal{N}(0,SS^T)$ 
 %so that a perturbed velocity is $\textbf{u}_k = \bar{\textbf{u}} + \sum_{i=0}^r{a_k^{(i)}\textbf{u}^{(i)}}$, with $a_k$ a perturbation vector. 
@@ -493,7 +548,7 @@ SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
 %    \begin{pcolumn}{0.32}
 %      \vspace{1cm}
 %      \begin{center}{\bf Technical issues to find the optimal solution} \end{center}
-%      \ding{226} We aim at decreasing the cost function, exploring the sub-space of velocity errors previously defined. 
+%      \ding{52} We aim at decreasing the cost function, exploring the sub-space of velocity errors previously defined. 
 %      Nevertheless, the cost function $J(u)$ is quite irregular and many local minima can be found. 
 %      To avoid being stuck in one of them, we decrease the cost function using a Simulated Annealing. \\
 %%      At each step, a perturbation is computed and the resulting cost function is calculated, if it is lower than the previous one, we adopt the perturbation, otherwise, we reject the perturbation with a certain probability. \\ 
@@ -512,7 +567,7 @@ SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
 
 %      \vspace{1em}
 
-%      \ding{226} As several perturbations result in similar values of the cost function, we need to find a strategy to compute accurately the final result. 
+%      \ding{52} As several perturbations result in similar values of the cost function, we need to find a strategy to compute accurately the final result. 
 %      To do so, we use a Gibbs Sampler. 
 %      In other words, we assess all the perturbations that are potential solutions to the problem. 
 %      The mean of all the potential solution gives us the optimal solution, and the variance indicates how reliable this optimal solution is. 
