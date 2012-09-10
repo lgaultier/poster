@@ -7,7 +7,7 @@ OSTST : poster_OSTST2012.tex
 	@echo "export in pdf"
 	@dvipdf poster_OSTST2012.dvi OSTST2012.pdf
 	@echo "delete compilation files"
-	@rm -f *.aux *.bbl *.blg *.dvi *.log
+	@rm -f *.aux *.bbl *.blg  #*.dvi *.log
 #	@mv poster.pdf poster_JC2.pdf 
 
 poster2.pdf : poster2.tex
