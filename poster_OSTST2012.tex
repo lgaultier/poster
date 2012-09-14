@@ -11,6 +11,7 @@
 \usepackage{pstricks,pst-grad}
 \usepackage{graphicx}
 %\usepackage{mathptmx}
+\usepackage{multirow}
 %\usepackage{mathpazo}
 \usepackage{amsbsy,amsmath}
 \usepackage{tikz} %add schemes
@@ -189,7 +190,8 @@
 \newrgbcolor{white}{1. 1. 1.}
 \newrgbcolor{whiteblue}{.80 .80 1.}
 \newrgbcolor{mycyan}{.20 .60 .60}
-
+\newrgbcolor{myred}{1 0.5 0.2}
+\newrgbcolor{myorange}{1 0.8 0.3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Begin of Document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -267,10 +269,10 @@
       { \bf \Large CONTEXT \\[5mm]}%MOTIVATIONS 
     \end{center}
     {\large
-      \ding{226} Lack of resolution in time and space for current altimetric data $\rightarrow$ Observation of the submesoscale resolution ($\simeq$ 50~km) is not possible \\
-      \ding{226} Submesoscale filaments can be observed using tracer sensors (SST or Ocean Color image, resolution of image$\simeq$ 1~km and a map a day)
+      \ding{226} Lack of resolution in time and space for current altimetric data $\rightarrow$ Observation of the sub-mesoscale resolution ($\simeq$ 50~km) is not possible \\
+      \ding{226} Sub-mesoscale filaments can be observed using tracer sensors (SST or Ocean Color image, resolution of image$\simeq$ 1~km and a map a day)
       \begin{center}
-      \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=mycyan, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ \bf How to complement altimeter data using sub-mesoscale tracer observations from space? }
+      \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=myorange,gradend=myorange, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ \bf How to complement altimeter data using sub-mesoscale tracer observations from space? }
       \end{center}
       \ding{226} Some studies brought to light the connection between mesoscale velocities and tracer patterns \citep{Dovidio2004, Lehahn2007}, but correcting mesoscale velocities using tracer images has never been done before.
 %%%   \begin{center}
@@ -355,7 +357,7 @@
     \end{tikzpicture} \\
 
 \begin{center}
-  \pbox{0.89\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=mycyan, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{Goal: Find the optimal velocity $\vec{u}$ that minimizes the cost function J.} 
+  \pbox{0.89\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=myorange,gradend=myorange, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{Goal: Find the optimal velocity $\vec{u}$ that minimizes the cost function J.} 
 \end{center}
   }
   %  \vspace*{0.2cm}
@@ -373,7 +375,7 @@ The strategy built up for the inversion of a tracer image is the following:
   $\bullet$ Explore the subspace of error \\
   $\bullet$  Use a simulated annealing algorithm to decrease the cost function: \\
 %    \vspace*{0.2cm}
-  $\bullet$ Use a Gibbs Sampler to assess possible solutions around the minimum of the cost function: As several perturbations result in similar values of the cost function, we compute a sample of all the potential solutions. \\ 
+  $\bullet$ Use a Gibbs sampler to assess possible solutions around the minimum of the cost function: As several perturbations result in similar values of the cost function, we compute a sample of all the potential solutions. \\ 
 %\begin{center}
      \end{minipage}
 %     \begin{center}
@@ -418,7 +420,7 @@ The strategy built up for the inversion of a tracer image is the following:
     {\large
  \begin{minipage}{0.64\textwidth}
    \vspace*{0.2cm}
-\ding{226} FLSE is the exponential rate at which two particles seperate from a distance $\delta _0$ to $\delta _f$: $ \lambda=\frac{1}{\tau}\ln{\frac{\delta_f}{\delta_0}}$.\\ 
+\ding{226} FLSE is the exponential rate at which two particles separate from a distance $\delta _0$ to $\delta _f$: $ \lambda=\frac{1}{\tau}\ln{\frac{\delta_f}{\delta_0}}$.\\ 
 It is a connection between sub-mesoscale dynamics and tracer stirring. \\ 
 \ding{226}There are similar patterns between the maximum lines of FSLE (computed backward in time) and the tracer frontal structure (the norm of the gradient) \\
 \ding{226}To compare the dynamics and the tracer image, the FSLE field and the normalized SST gradients are \\ binarized: 
@@ -440,7 +442,7 @@ $
 %% \begin{pcolumn}{0.32}
   \pbox{0.90\columnwidth}{13cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
     \begin{center}
-      {\sc \bf \Large TEST CASE\\[5mm]} 
+      {\sc \bf \Large TEST CASE: SOUTH ATLANTIC\\[5mm]} 
     \end{center} 
  
     \vspace*{0.2cm}
@@ -450,7 +452,7 @@ $
  
 %    \begin{figure}
       \myfig{./pict/s_atl/s_atlb.eps}{0.99}
-      \small{Chorophyll, in the South Atlantic Ocean. The study area is inside the pink frame}
+      \small{Chlorophyll, in the South Atlantic Ocean. The study area is inside the pink frame}
 %      \caption{South Atlantic Ocean}
 %     \end{figure}
 \end{minipage}
@@ -526,34 +528,45 @@ Looking at the corrected velocity and the corresponding FSLE, we can see that th
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
-  \pbox{0.90\columnwidth}{25.0cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
-     \begin{center}{\sc \bf \Large  NEW RESULTS: INVERSION ON A MODEL\\[5mm]} \end{center}
+  \pbox{0.93\columnwidth}{26.0cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=0em}{
+%\hspace{-1cm}
+%\vspace{-1cm}
+\begin{tabular}{p{5cm}p{35cm}}
+\begin{minipage}{1\linewidth}
+\rotatebox{30}{\bf \textcolor{myred}{BRAND NEW}}
+\end{minipage}
+ &\begin{minipage}{0.8\linewidth}
+\begin{center}
+{\sc \bf \Large  INVERSION IN A COUPLED PHYSICAL-BIOGEOCHEMICAL MODEL}
+\end{center}
+\end{minipage}\\
+\end{tabular}
     {\large
-\ding{226} An idealized coupled physico-biogeochemical model is set up to confirm the efficiency of the method. The model configuration is the following:\\
-$\bullet$ Nemo dynmics in a channel is coupled with LOBSTER biogeochemical model. \\
+\ding{226} An idealized model is set up to confirm the efficiency of the method: \\
+$\bullet$ NEMO (dynamics) + LOBSTER (biogeochemics) models. \\
 $\bullet$ Channel domain: 478~km $\times$ 500~km $\times$ 4~ km, horizontal resolution: 2km \\ 
-$\bullet$ Mesoscale and sub-mesoscale physics result from an unstable baroclinic jet \\  
+$\bullet$ Unstable baroclinic jet dynamics\\  
 \ding{226} Inversion of Chlorophyll and SST images to correct a perturbed velocity: \\
 %This method has been tested on an idealized physico-biogeochemical model. 
 %Knowing the truth, the tracers SST and Chlorophyll are inverted to correct a perturbed velocity. The correction brought by the algorithm is assessed. Nearly 50\% of the error on the pertubation file is corrected. % how much the improvement brought by this algorithm
 %Orrection of 50\% 
 \begin{minipage}{0.21\textwidth}
 \begin{center}
-\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_pert.eps}%{0.99}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_pert_mod.eps}%{0.99}
 \\
 {\small \bf Perturbed velocity}
 \end{center}
 \end{minipage}
 \begin{minipage}{0.21\textwidth}
 \begin{center}
-\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_0070.eps}%{0.99}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_0070_mod.eps}%{0.99}
 \\
 {\small \bf Corrected velocity}
 \end{center}
 \end{minipage}
 \begin{minipage}{0.21\textwidth}
 \begin{center}
-\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_F.eps}%{0.99}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_F_mod.eps}%{0.99}
 \\
 {\small \bf True velocity}
 \end{center}
@@ -572,14 +585,11 @@ $\bullet$ Mesoscale and sub-mesoscale physics result from an unstable baroclinic
 {\small \bf Chlorophyll}
 \end{center}
 \end{minipage}
-%\vline
-%\begin{minipage}{0.75\textwidth}
-%\begin{center}
-\pbox{0.70\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
-A perturbed velocity is corrected using the Chlorophyll image and the Sea Surface Temperature of the model. Comparing the corrected velocity with the true one, we found that about 40\% of the error is corrected. 
-} \vspace{1cm}
+\begin{minipage}{0.70\textwidth}
+\pbox{0.80\textwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
+A perturbed velocity is corrected using the Chlorophyll image and the Sea Surface Temperature of the model. Comparing the corrected velocity with the true one, we found that about 40\% of the error is corrected.} \vspace{1cm}
 %\end{center}
-%\end{minipage}
+\end{minipage}
   } %large
   } %pbax 
 \end{center}
@@ -590,13 +600,13 @@ A perturbed velocity is corrected using the Chlorophyll image and the Sea Surfac
     \begin{center}{\sc \bf \Large  CONCLUSION\\[5mm]} \end{center}
     {\large
      \begin{center}
-      \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=mycyan, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ We succeeded in correcting an altimetric mesoscale velocity field using a sub-mesoscale tracer observation from space }
+      \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=myorange,gradend=myorange, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ We succeeded in correcting an altimetric mesoscale velocity field using a sub-mesoscale tracer observation from space }
       \end{center}
       \ding{226} The corrected velocity is more consistent with the tracer field than the background AVISO velocity derived from altimetry alone, and the uncertainty on this result is small. 
        However, the method still needs to be improved, since some areas of the velocity field are not accurately corrected. \\    
       \ding{226} We used a high resolution model with biogeochemics and physics coupled to refine the method. 
       Knowing the true sub-mesoscale velocity,  nearly 50\% of the error on the velocity can be corrected during the tracer inversion process. \\ %assessed how much the corrected velocity is a better match to the tracer than the mesoscale `observed' velocity. \\ 
-      \ding{226} This study opens the way for the use of very high resolution altimeter data (in the context of SWOT and SARAL projects). The strategy proposed in here enables us to handle huge amount of data in models. 
+      \ding{226} This study opens the way for the use of very high resolution altimeter data (in the context of SWOT and SARAL projects). The strategy proposed in here will also be helpful to handle huge amount of data in models. 
 %%PROSPECTS: Full DA on a physico biogeochemical model \\
 %%                 Learn to deal with HR image and huge data set to think ahead SWOT and SARAL missions. \\ 
    
@@ -606,126 +616,6 @@ A perturbed velocity is corrected using the Chlorophyll image and the Sea Surfac
 \end{multicols}
 %%\end{minipage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{center}
-%\pbox{0.96\columnwidth}{34cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
-%  \begin{center}
-%    {\sc \bf \Large METHOD \\[5mm]}
-%  \end{center} 
-%  {\large
-       
-%    \begin{pcolumn}{0.32}
-%      \vspace{1cm}
-%      \begin{center}{\bf Finite-Size Lyapunov Exponents (FSLE)} \end{center}
-    
-%      \ding{52} FSLE measure stirring in a fluid, It is a connection between
-%sub-mesoscale dynamics and biologic stirring.\\ 
-%      \ding{52} FSLE is the exponential rate at which two particles separate from a distance $\delta_0$ to $\delta_f$:
-%%\begin{equation*}
-%      $ \lambda=\frac{1}{\tau}\ln{\frac{\delta_f}{\delta_0}}$. \\ 
-%% \label{lyap}
-%%\end{equation*}
-%%      The particles are advected backward in time so that maximum lines of FSLE represent the unstable manifolds.
-%      Technically, four particles are initially at a distance $\delta_0$ from each other, we compute the time $\tau$ for these particles to reach the distance $\delta_f$ from the other four particles. 
-%      \vspace{1em}
-
-%      \begin{minipage}{0.49\textwidth}
-%      \pbox{0.9\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
-%        \myfig{./pict/fsle_48_stat_reg_19904_med.eps}{0.8}
-%        \small{FSLE (in day$^{-1}$) derived from the geostrophic AVISO velocity June 30$^{th}$, 2004} 
-%      }
-%      \end{minipage}
-%      \begin{minipage}{0.49\textwidth}
-%        There are similar patterns between the maximum lines of Lyapunov exponents and SST frontal structure
-%(that is to say the norm of the gradient). 
-%      \end{minipage}
-
-%      \vspace{1em}
-
-%      \vfill
-%      \ding{52} We want to find the FSLE field as close as possible to the normalized tracer gradient. Therefore, the FSLE field and the normalized SST gradients are binarized in order to compare those two physically different variables. 
-%        $$\hat{\lambda}=
-%   \left \{
-%   \begin{array}{r r r}
-%      0  &  if & \lambda<\lambda^s \\
-%      1  &  if & \lambda \ge \lambda^s \\
-%   \end{array}
-%   \right .$$
-%    \end{pcolumn}            
-%    \vline 
-%    \begin{pcolumn}{0.32}
-%      \vspace{1cm}
-%      \begin{center}{\bf The Cost Function} \end{center}
-%      \ding{52}The cost function $J$ measures the distance between the binarized normalized gradient of SST $\hat{\lambda}_o$ and the binarized FSLE $\hat{\lambda}({\bf u})$ (as a proxy of the velocity ${\bf u}$). 
-%A background term is added so that the corrections applied on the velocity are small.
-%%It also takes into account the fact that the corrected velocity should not be too far from the background velocity
-%      $$J({\bf u}) = \mu \; || \hat{\lambda}_o - \hat{\lambda}({\bf u}) ||^2+\ background \ term$$
-%%             +  ( {\bf u} - {\bf u}_b )^T  {\bf B}^{-1}
-%%                ( {\bf u} - {\bf u}_b )$$ 
-%       The minimum of the cost function corresponds to the velocity that is the most consistent with the tracer.
-
-%      \vspace{1em}
-%      \begin{center}
-%      \pbox{0.9\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
-%        \begin{minipage}{0.45\textwidth}
-%          \myfig{./pict/binsst_bin0.eps}{0.82}
-%          \small{Binarization of the norm of the SST gradient on July 2$^{nd}$, 2004}
-%        \end{minipage}
-%        \hfill
-%        \begin{minipage}{0.47\textwidth}
-%          \myfig{./pict/pfsle_48_stat_reg_19904_med.eps}{0.8}
-%          \small{Binarization of the FSLE derived from the AVISO velocity on June 30$^{th}$, 2004}
-%        \end{minipage}
-%      }
-%      \end{center}
-%      \vspace{1em}
-
-%      \ding{52} We create a velocity panel using Principal Component Analysis with an ensemble of velocities. \\ 
-%      Let S = $|u^{(1)}, u^{(2)}, ..., u^{(r)}|$ be the first r EOFs. 
-%      We consider velocity errors with zero mean and covariance of the ensemble of velocities $S$: $\delta u \sim \mathcal{N}(0,SS^T)$ 
-%so that a perturbed velocity is $\textbf{u}_k = \bar{\textbf{u}} + \sum_{i=0}^r{a_k^{(i)}\textbf{u}^{(i)}}$, with $a_k$ a perturbation vector. 
-%%     We explore the subspace of errors to find the most suitable correction.  
-%%     $$\textbf{u}_k = \bar{\textbf{u}} + \sum_{i=0}^n{\underbrace{a_k^i}_{Eigenvalue}\underbrace{\textbf{u}^i}_{EOF_{}}}$$
-%%Find the velocity that minimizes the cost function among the perturbed velocities
-%      \hfill
-%    \end{pcolumn}
-%    \vline
-%    \begin{pcolumn}{0.32}
-%      \vspace{1cm}
-%      \begin{center}{\bf Technical issues to find the optimal solution} \end{center}
-%      \ding{52} We aim at decreasing the cost function, exploring the sub-space of velocity errors previously defined. 
-%      Nevertheless, the cost function $J(u)$ is quite irregular and many local minima can be found. 
-%      To avoid being stuck in one of them, we decrease the cost function using a Simulated Annealing. \\
-%%      At each step, a perturbation is computed and the resulting cost function is calculated, if it is lower than the previous one, we adopt the perturbation, otherwise, we reject the perturbation with a certain probability. \\ 
-      
-%      \vspace{1em}
-
-%      \begin{minipage}{0.49\textwidth}
-%        \pbox{0.9\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
-%          \myfig{./pict/Jiter_real_19904_obs0_22_bin0.eps}{0.8}
-%          \small{Cost function as a function of the number of iteration (log-log plot) }
-%      }
-%      \end{minipage}
-%      \begin{minipage}{0.49\textwidth}
-%        At each step, a perturbation is computed and the resulting cost function is calculated, if it is lower than the previous one, we adopt the perturbation, otherwise, we reject the perturbation with a certain probability. \\
-%      \end{minipage}
-
-%      \vspace{1em}
-
-%      \ding{52} As several perturbations result in similar values of the cost function, we need to find a strategy to compute accurately the final result. 
-%      To do so, we use a Gibbs Sampler. 
-%      In other words, we assess all the perturbations that are potential solutions to the problem. 
-%      The mean of all the potential solution gives us the optimal solution, and the variance indicates how reliable this optimal solution is. 
-       
-%      \vfill
-%    \end{pcolumn}
-%  } %large
-%} %pbox
-%\end{center}
- 
-%\vspace*{0.2cm}
- 
-%\begin{multicols}{2}
  
  
 %%BIBLIO
