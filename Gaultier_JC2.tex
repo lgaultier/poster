@@ -1,0 +1,628 @@
+\documentclass[portrait,a0,final,a4resizeable]{a0poster}
+%\documentclass[portrait,a0b,final]{a0poster}
+%%% Option "a4resizeable" enables the poster to be resizable using the command: psresize -pa4 poster.ps poster-a4.ps
+%   with landscape option: psresize -W800 -H600 poster.ps poter-a4.ps
+%   and replace in "poster-a4.ps" the line:  
+%   %%BoundingBox: 0 0 2594 3402  with  %%BoundingBox: 0 0 600 800 
+%   For final printing, please remove option "a4resizeable" !!
+\usepackage{epsfig}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{pstricks,pst-grad}
+\usepackage{graphicx}
+%\usepackage{mathptmx}
+\usepackage{multirow}
+%\usepackage{mathpazo}
+\usepackage{amsbsy,amsmath}
+\usepackage{tikz} %add schemes
+\usetikzlibrary{shapes} %add diamonds shape to schemes
+\usepackage{pifont} %to use arrows
+\usepackage{array} %vertically centered cells in tabular
+%\usepackage{verbatim} % to enable comments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of some variables and colors %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\unnumberedcaption}%
+
+\newcommand{\BIBand}{and}
+
+\newcommand{\Deg}{$^{\circ} ~$}
+%\DeclareTextSymbol{\deg}{T1}{6}
+%\DeclareTextSymbol{\degre}{OT1}{23}
+
+\setlength{\bibsep}{0.0pt}
+\def\refname{\normalsize \bf References}
+%\setlength{\columnsep}{3cm}
+%\setlength{\columnseprule}{2mm}
+%\setlength{\parindent}{0.0cm}
+
+%\renewcommand{\vec}{\underline}
+%\renewcommand{\rho}{\varrho}
+%\renewcommand{\phi}{\varphi}
+\setlength{\columnsep}{0.1cm}
+\setlength{\columnseprule}{0mm}
+\setlength{\parindent}{0.0cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%               Background                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\background}[3]{
+  \newrgbcolor{cgradbegin}{#1}
+  \newrgbcolor{cgradend}{#2}
+  \psframe[fillstyle=gradient,gradend=cgradend,
+  gradbegin=cgradbegin,gradmidpoint=#3](0.,0.)(1.\textwidth,-1.\textheight)
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                Poster                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{poster}{
+  \begin{center}
+  \begin{minipage}[c]{1.0\textwidth}
+}{
+  \end{minipage} 
+  \end{center}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pcolumn                       %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  \flushcolumns %top and bottom baselines of all columns align.
+\newenvironment{pcolumn}[1]{
+  \begin{minipage}{#1\textwidth}
+%  \begin{center}
+}{
+%  \end{center}
+  \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pboxx                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+
+\newcommand{\pboxx}[4]{
+\begin{minipage}[t][#2][t]{#1}
+#4
+\end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pbox                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+
+\newcommand{\pbox}[4]{
+         \psshadowbox[#3]{
+            \begin{minipage}[t][#2][t]{#1} #4
+            \end{minipage}
+         }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pfig                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pfig - replacement for \figure
+% necessary, since in multicol-environment
+% \figure won't work
+
+\newcommand{\pfig}[3][0]{
+\begin{center}
+  \vspace{1cm}
+  \includegraphics[width=#3\hsize,angle=#1]{#2}
+  \nobreak\medskip
+\end{center}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pcaption                      %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pcaption - replacement for \caption
+% necessary, since in multicol-environment \figure and
+% therefore \caption won't work
+
+%\newcounter{figure}
+\setcounter{figure}{1}
+\newcommand{\pcaption}[1]{
+  \vspace{0.cm}
+  \begin{quote}
+    {{\sc Figure} \arabic{figure}: #1}
+  \end{quote}
+  \vspace{1cm}
+  \stepcounter{figure}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                myfig                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \myfig - replacement for \figure
+% necessary, since in multicol-environment 
+% \figure won't work
+
+\newcommand{\myfig}[3][0]{
+\begin{center}
+  \vspace{0.10cm}
+  \includegraphics[width=#3\hsize,angle=#1]{#2}
+%  \nobreak\medskip
+\end{center}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                mycaption                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \mycaption - replacement for \caption
+% necessary, since in multicol-environment \figure and
+% therefore \caption won't work
+
+%\newcounter{figure}
+\setcounter{figure}{1}
+\newcommand{\mycaption}[1]{
+  \vspace{0.0cm}
+  \begin{quote}
+    {\small{#1}}
+  \end{quote}
+  \vspace{0cm}
+  \stepcounter{figure}
+}
+
+
+% MES DEFINITIONS DES COULEURS:
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+\newrgbcolor{gradbegin}{0 0 0.8}
+\newrgbcolor{gradend}{1 1 1}
+\newrgbcolor{lightblue}{0. 0. 0.80}
+\newrgbcolor{lightyellow}{1 1 0.}
+\newrgbcolor{customcolor}{1 0.75 0.}
+\newrgbcolor{customcolor2}{1 0.5 0.}
+\newrgbcolor{customcolor3}{0 0.8 0.2}
+\newrgbcolor{white}{1. 1. 1.}
+\newrgbcolor{whiteblue}{.80 .80 1.}
+\newrgbcolor{mycyan}{.20 .60 .60}
+\newrgbcolor{myred}{1 0.5 0.2}
+\newrgbcolor{myorange}{1 0.8 0.3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\background{0.2 0.6 0.6}{1. 1. 1.}{0.5}
+
+\vspace*{1cm}
+
+%\newrgbcolor{lightblue}{0. 0. 0.80}
+%\newrgbcolor{white}{1. 1. 1.}
+%\newrgbcolor{whiteblue}{.80 .80 1.}
+
+%\newrgbcolor{darkred}{0.6 0 0}
+%\newrgbcolor{lightblue2}{0.2 0.2 1}
+%\newrgbcolor{lightblue}{0.5 0.5 1}
+%\newrgbcolor{white}{1. 1. 1.}
+%\newrgbcolor{whiteblue}{.80 .80 1.}
+%\newrgbcolor{mycyan}{rgb}{0.2,0.6,0.6}
+
+  \newcommand{\etal}{{\it et al.}}
+  \newcommand{\DegN}{$^{\circ}$N~}
+  \newcommand{\DegW}{$^{\circ}$W~}
+  \newcommand{\DegE}{$^{\circ}$E~}
+  \newcommand{\DegS}{$^{\circ}$S~}
+
+
+\begin{poster}
+%%%%%%%%%%%%%%%%%%%%%
+%%% Header
+%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{pcolumn}{0.98}
+  \begin{center}
+  \pbox{0.95\textwidth}{}{linewidth=2mm,framearc=0.3,linecolor=mycyan,shadowcolor=white,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+ 
+%%% Logo
+  \begin{minipage}[l][9cm][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=0.70\textwidth,angle=0]{./pict/logo/logo_cnrs.eps}
+    \includegraphics[width=1.29\textwidth,angle=0]{./pict/logo/CNES_LogoTerre.eps}
+  \end{center}
+  \end{minipage}
+%%% Titre
+  \begin{minipage}[c][9cm][c]{0.78\textwidth}
+  \begin{center}
+    {\sc \huge \bf On the Joint Use of High Resolution Tracer Images and Altimetric Data for the Control of Ocean Circulations}\\[10mm]
+    {\Large Lucile Gaultier$^{1}$, Jacques Verron$^{1}$, Jean-Michel Brankart$^{1}$ and Pierre Brasseur$^{1}$} \\[5mm]
+    {\large {$^{1}$ \it Laboratoire des Ecoulements G\'eophysiques et Industriels, UMR 5519, CNRS, Grenoble, France} \\
+%     %{$^{2}$ \it Departement of Oceanography, The Florida State University, Tallahassee, USA}\\
+    {\large \it e-mail: lucile.gaultier@legi.grenoble-inp.fr}
+    } 
+  \end{center}
+  \end{minipage}
+%%%Logo
+  \begin{minipage}[r][9cm][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth,angle=0]{./pict/logo/logo_meom.eps}
+    \includegraphics[width=0.9\textwidth,angle=0]{./pict/logo/logo_legi.eps}
+  \end{center}
+  \end{minipage} 
+  }  %pbox
+  \end{center}
+\end{pcolumn}
+\end{center}
+ 
+%%% Begin of Multicols-Environment
+\begin{multicols}{2}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%% Introduction
+  \begin{center}
+% \begin{pcolumn}{0.32}
+  \pbox{0.90\columnwidth}{28cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=1.0,framesep=1em}{
+    \begin{center} 
+      { \bf \Large CONTEXT \\[5mm]}%MOTIVATIONS 
+    \end{center}
+    {\large
+      \ding{226} Lack of resolution in time and space for current altimetric data $\rightarrow$ Observation of the sub-mesoscale resolution ($\simeq$ 50~km) is not possible \\
+      \ding{226} Sub-mesoscale filaments can be observed using tracer sensors (SST or Ocean Color image, resolution of image$\simeq$ 1~km and a map a day)
+      \begin{center}
+      \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=myorange,gradend=myorange, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ \bf How to complement altimeter data using sub-mesoscale tracer observations from space? }
+      \end{center}
+      \ding{226} Some studies brought to light the connection between mesoscale velocities and tracer patterns \citep{Dovidio2004, Lehahn2007}, but correcting mesoscale velocities using tracer images has never been done before.
+%%%   \begin{center}
+      \begin{tikzpicture}
+%%%    \node[color=blue, text width=10cm, text centered] (UV) at (16,6.8) {Mesoscale field};
+        \node[color=black, text width=09.73cm, text centered] (pUV) at (16,0.48) {
+        \includegraphics[width=1\linewidth]{pict/aviso_20079_tas.eps}};
+        \node[color=black, text width=20cm, text centered] (cUV) at (17,-6.) {\small{Velocity map, Tasmania region, December 22, 2004}};
+%%%        \mycaption{Velocity map, Tasmania region, December 22, 2004}
+%%%         };
+%%    \node[color=green, text width=15cm, text centered] (TRA) at (0,6.7) {Sub-mesoscale tracer image};
+       \node[color=black, text width=10cm, text centered] (pTRA) at (0,0) {
+       \includegraphics[width=1\linewidth]{pict/A2004358041000_L2_LAC_OC.eps}};
+        \node[color=black, text width=20cm, text centered] (cUV) at (0,-6.) {\small{Chlorophyll, Tasmania region, December 22, 2004}};
+%        \mycaption{Chlorophyll, Tasmania region, December 22, 2004}
+ %      };
+        \node[draw] (int) at (8,2.1) {\large{?}};
+%  \draw[arrows={triangle 45-triangle 45}] (pTRA)--(16,0);
+%  \draw[->, thick,double distance=4pt , >=stealth] (pTRA)--(10,0);
+        \draw[->, ultra thick, >=latex] (pTRA)--(10,0);
+      \end{tikzpicture}\\ 
+      \ding{226} 
+       Use Finite-Size Lyapunov Exponents (FSLE) as a go-between variable.
+
+    } %large
+  } %pbox
+  \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+  \pbox{0.90\columnwidth}{45cm}{linewidth=2mm, framearc=0.1, linecolor=mycyan, fillstyle=gradient, gradangle=0, gradbegin=white, gradend=white, gradmidpoint=1.0, framesep=1em}{
+    \begin{center}
+      {\sc \bf \Large DATA IMAGE ASSIMILATION\\[5mm]}
+    \end{center}
+ %   \vspace*{0.2cm}
+    {\large
+
+\iffalse
+    \node[color=black, text width=10.73cm, text centered] (ptra) at (10,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/chl2006019.eps}};
+    \node[color=black, text width=08.73cm, text centered] (ptra) at (20,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/sst_20471_small.eps}};
+    \node[color=black, text width=08.00cm, text centered] (puv) at (30,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_20471_s_atl2_oc.eps}};
+    \node[color=black, text width=08.73cm, text centered] (ph) at (40,5.48) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/aviso_h_020471_bin0.eps}};
+    \draw[->, very thick, >=stealth] (ph)--(puv) ;
+
+    \node[color=black, text width=08.73cm, text centered] (ptra) at (10,-10) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/sst_20471_small.eps}};
+    \node[color=black, text width=08.73cm, text centered] (puv) at (16,-10) {
+    \includegraphics[width=1\linewidth]{./pict/s_atl/fsle_48_stat_reg_20471__bin0.eps}};
+
+
+    \node[draw,color=blue, text width=10cm, text centered] (J) at (16,-15) {Cost function};
+    \node[color=black, text width=10cm, text centered] (fJ) at (16,-17) {$$J=\| I_{obs} - I_{FSLE}(u)\|$$ +background term};
+\fi
+    \begin{tikzpicture}
+    \tikzset{pname/.style={draw,rectangle,rounded corners=6pt},text centered,color=black}
+    \tikzstyle{fleche}=[->,>=latex,line width=1.6mm]
+    \node[pname,text width=7cm] (OBS) at (9,3.98) {Observations};
+    \node[pname,text width=7cm] (IM) at (9,-6.08) {Image};
+    \draw[fleche] (OBS)--(IM);
+    \draw[dashed,line width=0.5mm] (13.75,6.98)--(13.75,-7.1);
+
+    \node[pname,text width=10cm] (TRA) at (20.5,6.48) {Sub-mesoscale tracer};
+    \node[pname,text width=10cm] (DYN) at (32.5,6.48) {Dynamics};
+    \draw[dashed,line width=0.5mm] (26.5,6.98)--(26.5,-7.1);
+    \node[pname,text width=10cm] (OBSTRA) at (20.5,2.08) {MODIS observation of Sea Surface Temperature and/or Chlorophyll};
+    \node[pname,text width=10cm] (OBSSSH) at (32.5,3.38) {Sea Surface Height from Altimetry};
+    \node[pname,text width=10cm] (OBSUV) at (32.5,-1.08) {Corresponding geostrophic velocity $\vec{u}$};
+    \draw[fleche] (OBSSSH)--(OBSUV);
+
+    \node[pname, text width=10cm] (IMTRA) at (20.5,-5.88) {Image of tracer filaments $I_{tracer}$};
+    \node[pname,text width=10cm] (IMDYN) at (32.5,-5.88) {Image of FSLE $I_{FSLE}(\vec{u})$};
+    \draw[fleche] (OBSTRA)--(IMTRA);
+    \draw[fleche] (OBSUV)--(IMDYN);
+   
+   \node[pname, text width=30cm] (J) at (26.5,-11.08) {COST FUNCTION: $J(\vec{u})=\|I_{tracer}- I_{FSLE}(\vec{u})\| + background\ term$};
+   \draw[fleche] (IMTRA)--(J);
+   \draw[fleche] (IMDYN)--(J);
+    \end{tikzpicture} \\
+
+\begin{center}
+  \pbox{0.89\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=myorange,gradend=myorange, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{Goal: Find the optimal velocity $\vec{u}$ that minimizes the cost function J.} 
+\end{center}
+  }
+  %  \vspace*{0.2cm}
+    \begin{center}
+      {\sc \bf \Large INVERSION METHOD \\[5mm]}
+    \end{center}
+    \vspace*{0.5cm}
+    {\large
+The strategy built up for the inversion of a tracer image is the following:
+  
+      \begin{minipage}{0.55\textwidth}
+%    \vspace*{1.0cm}
+%\pbox{0.99\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
+  $\bullet$ Compute a subspace of error to perturb the velocity \\
+  $\bullet$ Explore the subspace of error \\
+  $\bullet$  Use a simulated annealing algorithm to decrease the cost function: \\
+%    \vspace*{0.2cm}
+  $\bullet$ Use a Gibbs sampler to assess possible solutions around the minimum of the cost function: As several perturbations result in similar values of the cost function, we compute a sample of all the potential solutions. \\ 
+%\begin{center}
+     \end{minipage}
+%     \begin{center}
+\hspace{0.5em}
+     \begin{minipage}{0.41\textwidth}
+    \vspace*{0.20cm}
+        \pbox{0.99\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
+          \vspace*{1.7cm}
+          \myfig{./pict/s_atl/Jiter_20471_s_atl2.eps}{0.99}
+          \small{Cost function as a function of the number of iteration (log-log plot) }
+      }
+    \vspace*{0.20cm} 
+     \end{minipage}
+%\end{center}
+%\newline
+%\newline
+    %\vspace*{0.2cm}
+\begin{center}\small{(See \cite{Gaultier2012} for more details) }\end{center}
+%    & \includegraphics[width=2.75cm]{./pict/aviso_h_020471_bin0.png}
+%    & \includegraphics[width=2.35cm]{./pict/aviso_20471_s_atl2_oc.png}
+%    & \includegraphics[width=2.75cm]{./pict/fsle_48_stat_reg_20471__bin0.png}
+%    & \alt<2>{\includegraphics[width=2.73cm]{./pict/chl2006019.png}}
+%      {\includegraphics[width=2.75cm]{./pict/sst_20471_small.png}}
+
+   } %large
+  } %pbox
+\end{center}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{center}
+  \pbox{0.90\columnwidth}{15.5cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+    \begin{center}
+      {\sc \bf \Large Finite Size Lyapunov Exponents (FSLE)\\[5mm]}
+    \end{center}
+
+   %\vspace*{0.2cm}
+\begin{minipage}{0.35\textwidth}
+%\myfig{./pict/GND100L_ly_inst_temp_0529.eps}{0.9}
+\myfig{./pict/EEL-R2BIG_FSLECHL_instat20_19690429.eps}{0.99}
+\small{FSLE maximum lines plotted over Chlorophyll, data provided by a high resolution model}
+\end{minipage}
+    {\large
+ \begin{minipage}{0.64\textwidth}
+   \vspace*{0.2cm}
+\ding{226} FLSE is the exponential rate at which two particles separate from a distance $\delta _0$ to $\delta _f$: $ \lambda=\frac{1}{\tau}\ln{\frac{\delta_f}{\delta_0}}$.\\ 
+It is a connection between sub-mesoscale dynamics and tracer stirring. \\ 
+\ding{226}There are similar patterns between the maximum lines of FSLE (computed backward in time) and the tracer frontal structure (the norm of the gradient) \\
+\ding{226}To compare the dynamics and the tracer image, the FSLE field and the normalized SST gradients are \\ binarized: 
+        $\hat{\lambda}=
+   \left \{
+   \begin{array}{r r r}
+      0  &  if & \lambda<\lambda^s \\
+      1  &  if & \lambda \ge \lambda^s \\
+   \end{array}
+   \right .
+$
+\end{minipage}
+  } %large
+  } %pbox
+  \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{center}
+%% \begin{pcolumn}{0.32}
+  \pbox{0.90\columnwidth}{13cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+    \begin{center}
+      {\sc \bf \Large TEST CASE: SOUTH ATLANTIC\\[5mm]} 
+    \end{center} 
+ 
+    \vspace*{0.2cm}
+    {\large  
+    \vspace*{0.2cm}
+\begin{minipage}{0.35\textwidth}
+ 
+%    \begin{figure}
+      \myfig{./pict/s_atl/s_atlb.eps}{0.99}
+      \small{Chlorophyll, in the South Atlantic Ocean. The study area is inside the pink frame}
+%      \caption{South Atlantic Ocean}
+%     \end{figure}
+\end{minipage}
+\begin{minipage}{0.65\textwidth}
+  \begin{itemize}
+    \item Time Range to build a subspace of error: 1998-2009, 595 velocity maps from AVISO (altimetric data)
+    \item Background Velocity: AVISO map on 01/18/2006
+    \item Velocity resolution: $1/3^o$, grid points : 13*17
+  %  \item FSLE Resolution: $1/48^o$, grid points : 99*130
+    \item Tracer field: SST or Chlorophyll data (MODIS sensor, L2 product) on 01/19/2003
+    \item Resolution of the Tracer field: $1/50^o$
+    \item FSLE Resolution: $1/48^o$, grid points : 99*130
+    %resolution needed to detect filament $1/100^o$, to match fsle $1/50^o$
+  \end{itemize}
+\end{minipage}
+%   \begin{minipage}{0.49\linewidth} 
+%      \begin{pcolumn}{0.49}
+%\ 
+%AVISO ALTIMETRIC DATA AND MODIS SENSOR
+%      \end{pcolumn}
+%      \begin{pcolumn}{0.49}
+% MODEL \\ 
+%\ 
+%SIMULATION IDEALISE HAUTE RESOLUTION COUPLEE PHYSIQUE BIOLOGIE\\
+%
+%    \end{pcolumn}
+%   \end{minipage}
+  } %large
+  } %pbox
+  \end{center}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+  \pbox{0.90\columnwidth}{31cm}{linewidth=2mm, framearc=0.1, linecolor=mycyan, fillstyle=gradient, gradangle=0, gradbegin=white, gradend=white, gradmidpoint=1.0, framesep=1em}{
+    \begin{center}
+      {\sc \bf \Large RESULTS\\[5mm]}
+    \end{center}
+    \vspace*{0.2cm}
+    {\large
+    \begin{tabular}{cccl}
+    %\hline
+     {\small \bf SSH observation}
+    & {\small \bf Geostrophic velocity}
+    & {\small \bf Resulting FSLE}
+    & {\small \bf Chlorophyll observation} \\
+    %\hline
+%    \rotatebox{90}{hspace{1cm}\small{OBSERVATION}}
+    \includegraphics[width=7.99cm]{./pict/s_atl/aviso_h_020471.eps}
+    & \includegraphics[width=7.35cm]{./pict/s_atl/aviso_20471_s_atl2_oc.eps}
+    & \includegraphics[width=7.99cm]{./pict/s_atl/fsle_48_stat_reg_20471__bin0.eps}
+    & \includegraphics[width=7.93cm]{./pict/s_atl/chl2006019.eps} \\
+  %   \hline
+     {\small \bf Corrected SSH}
+    & {\small \bf Corrected velocity}
+    & {\small \bf Resulting FSLE}
+    & \\
+    % \hline
+%    \rotatebox{90}{\hspace{1cm}\small{CORRECTION}}
+    \includegraphics[width=7.9cm]{./pict/s_atl/aviso_h_020471_eof_bin1_oc.eps}
+   & \includegraphics[width=7.3cm]{./pict/s_atl/aviso_20471_s_atl2_sa_oc.eps}
+   & \includegraphics[width=7.95cm]{./pict/s_atl/fsle_48_stat_reg_20471__sa_bin1_oc.eps}
+   & \\
+ %\hline
+  \end{tabular}
+\\
+The inversion method aims at correcting velocity vectors so as to follow tracer frontal structures.\\
+\ding{226} 
+Looking at the Chlorophyll image and the FSLE computed using the observed AVISO velocity, we can clearly see that the eddy is shifted in AVISO data.  \\
+Looking at the corrected velocity and the corresponding FSLE, we can see that the eddy is well corrected. The corrected velocity is a better match to the tracer frontal structure than the AVISO derived velocity. 
+  } %large
+  } %pbax 
+  \end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+  \pbox{0.93\columnwidth}{26.0cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=0em}{
+%\hspace{-1cm}
+%\vspace{-1cm}
+\begin{tabular}{p{5cm}p{35cm}}
+\begin{minipage}{1\linewidth}
+\rotatebox{30}{\bf \textcolor{myred}{BRAND NEW}}
+\end{minipage}
+ &\begin{minipage}{0.8\linewidth}
+\begin{center}
+{\sc \bf \Large  INVERSION IN A COUPLED PHYSICAL-BIOGEOCHEMICAL MODEL}
+\end{center}
+\end{minipage}\\
+\end{tabular}
+    {\large
+\ding{226} An idealized model is set up to confirm the efficiency of the method: \\
+$\bullet$ NEMO (dynamics) + LOBSTER (biogeochemics) models. \\
+$\bullet$ Channel domain: 478~km $\times$ 500~km $\times$ 4~ km, horizontal resolution: 2km \\ 
+$\bullet$ Unstable baroclinic jet dynamics\\  
+\ding{226} Inversion of Chlorophyll and SST images to correct a perturbed velocity: \\
+%This method has been tested on an idealized physico-biogeochemical model. 
+%Knowing the truth, the tracers SST and Chlorophyll are inverted to correct a perturbed velocity. The correction brought by the algorithm is assessed. Nearly 50\% of the error on the pertubation file is corrected. % how much the improvement brought by this algorithm
+%Orrection of 50\% 
+\begin{minipage}{0.21\textwidth}
+\begin{center}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_pert_mod.eps}%{0.99}
+\\
+{\small \bf Perturbed velocity}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.21\textwidth}
+\begin{center}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_0070_mod.eps}%{0.99}
+\\
+{\small \bf Corrected velocity}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.21\textwidth}
+\begin{center}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGvel_0324_F_mod.eps}%{0.99}
+\\
+{\small \bf True velocity}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+\begin{center}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGsst_0324.eps}
+\\
+{\small \bf SST}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.25\textwidth}
+\begin{center}
+\includegraphics[width=1\linewidth]{./pict/sa_uv-R2BIGchl_0324.eps}
+\\
+{\small \bf Chlorophyll}
+\end{center}
+\end{minipage}
+\begin{minipage}{0.70\textwidth}
+\pbox{0.80\textwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{
+A perturbed velocity is corrected using the Chlorophyll image and the Sea Surface Temperature of the model. Comparing the corrected velocity with the true one (using $\ell 2$-norm), we found that about 40\% of the error is corrected.} \vspace{1cm}
+%\end{center}
+\end{minipage}
+  } %large
+  } %pbax 
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+  \pbox{0.90\columnwidth}{17.0cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+    \begin{center}{\sc \bf \Large  CONCLUSION\\[5mm]} \end{center}
+    {\large
+     \begin{center}
+      \pbox{0.90\columnwidth}{}{linewidth=0.5mm,framearc=0.2,linecolor=black, fillstyle=gradient,gradangle=0,gradbegin=myorange,gradend=myorange, gradmidpoint=0.0,framesep=3mm, shadowsize=0pt}{ We succeeded in correcting an altimetric mesoscale velocity field using a sub-mesoscale tracer observation from space }
+      \end{center}
+      \ding{226} The corrected velocity is more consistent with the tracer field than the background AVISO velocity derived from altimetry alone, and the uncertainty on this result is small. 
+       However, the method still needs to be improved, since some areas of the velocity field are not accurately corrected. \\    
+      \ding{226} We used a high resolution model with biogeochemics and physics coupled to refine the method. 
+      Knowing the true sub-mesoscale velocity,  nearly 40\% of the error on the velocity can be corrected during the tracer inversion process. \\ %assessed how much the corrected velocity is a better match to the tracer than the mesoscale `observed' velocity. \\ 
+      \ding{226} This study opens the way for the use of very high resolution altimeter data (in the context of SWOT and SARAL projects). The strategy proposed in here will also be helpful to handle huge amount of data in models. 
+%%PROSPECTS: Full DA on a physico biogeochemical model \\
+%%                 Learn to deal with HR image and huge data set to think ahead SWOT and SARAL missions. \\ 
+   
+    } %large
+  }  %pbox
+ \end{center}
+\end{multicols}
+%%\end{minipage}
+
+ 
+ 
+%%BIBLIO
+{\small
+   \bibliographystyle{./bst/jpo}
+ %\bibliographystyle{alpha}
+  \bibliography{../biblio/biblio_th}
+}
+\end{poster}
+\end{document}
