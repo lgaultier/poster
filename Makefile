@@ -10,6 +10,18 @@ OSTST : poster_OSTST2012.tex
 	@rm -f *.aux *.bbl *.blg  #*.dvi *.log
 #	@mv poster.pdf poster_JC2.pdf 
 
+JC2 : Gaultier_JC2.tex
+	@echo "compile poster"
+	@latex Gaultier_JC2.tex
+	@bibtex Gaultier_JC2
+	@latex Gaultier_JC2.tex
+	@latex Gaultier_JC2.tex
+	@echo "export in pdf"
+	@dvipdf Gaultier_JC2.dvi Gaultier_JC2.pdf
+	@echo "delete compilation files"
+	@rm -f *.aux *.bbl *.blg  #*.dvi *.log
+#	@mv poster.pdf poster_JC2.pdf 
+
 poster2.pdf : poster2.tex
 	@echo "compile poster"
 	@latex poster2.tex
