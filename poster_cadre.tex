@@ -1,0 +1,316 @@
+\documentclass[portrait,a0b,final,a4resizeable]{a0poster}
+%@author Lucile Gaultier
+%\documentclass[portrait,a0b,final]{a0poster}
+%%% Option "a4resizeable" enables the poster to be resizable using the command: psresize -pa4 poster.ps poster-a4.ps
+%   with landscape option: psresize -W800 -H600 poster.ps poter-a4.ps
+%   and replace in "poster-a4.ps" the line:  
+%   %%BoundingBox: 0 0 2594 3402  with  %%BoundingBox: 0 0 600 800 
+%   For final printing, please remove option "a4resizeable" !!
+\usepackage{epsfig}
+\usepackage{multicol}
+\usepackage{natbib}
+\usepackage{pstricks,pst-grad}
+\usepackage{graphicx}
+\usepackage{amsbsy,amsmath}
+\usepackage{tikz} %add schemes
+\usetikzlibrary{shapes} %add diamonds shape to schemes
+\usepackage{pifont} %to use arrows
+\usepackage{array} %vertically centered cells in tabular
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of some variables and colors %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\unnumberedcaption}%
+
+\newcommand{\BIBand}{and}
+
+\newcommand{\Deg}{$^{\circ} ~$}
+%\DeclareTextSymbol{\deg}{T1}{6}
+%\DeclareTextSymbol{\degre}{OT1}{23}
+
+\setlength{\bibsep}{0.0pt}
+\def\refname{\normalsize \bf References}
+%%\renewcommand{\rho}{\varrho}
+%%\renewcommand{\phi}{\varphi}
+%\setlength{\columnsep}{3cm}
+%\setlength{\columnseprule}{2mm}
+%\setlength{\parindent}{0.0cm}
+
+\renewcommand{\vec}{\underline}
+%\renewcommand{\rho}{\varrho}
+%\renewcommand{\phi}{\varphi}
+\setlength{\columnsep}{0.1cm}
+\setlength{\columnseprule}{0mm}
+\setlength{\parindent}{0.0cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%               Background                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\background}[3]{
+  \newrgbcolor{cgradbegin}{#1}
+  \newrgbcolor{cgradend}{#2}
+  \psframe[fillstyle=gradient,gradend=cgradend,
+  gradbegin=cgradbegin,gradmidpoint=#3](0.,0.)(1.\textwidth,-1.\textheight)
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                Poster                        %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{poster}{
+  \begin{center}
+  \begin{minipage}[c]{1.0\textwidth}
+}{
+  \end{minipage} 
+  \end{center}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pcolumn                       %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%  \flushcolumns %top and bottom baselines of all columns align.
+\newenvironment{pcolumn}[1]{
+  \begin{minipage}{#1\textwidth}
+%  \begin{center}
+}{
+%  \end{center}
+  \end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pboxx                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+
+\newcommand{\pboxx}[4]{
+\begin{minipage}[t][#2][t]{#1}
+#4
+\end{minipage}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pbox                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+
+\newcommand{\pbox}[4]{
+         \psshadowbox[#3]{
+            \begin{minipage}[t][#2][t]{#1} #4
+            \end{minipage}
+         }
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pfig                          %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pfig - replacement for \figure
+% necessary, since in multicol-environment
+% \figure won't work
+
+\newcommand{\pfig}[3][0]{
+\begin{center}
+  \vspace{1cm}
+  \includegraphics[width=#3\hsize,angle=#1]{#2}
+  \nobreak\medskip
+\end{center}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                pcaption                      %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \pcaption - replacement for \caption
+% necessary, since in multicol-environment \figure and
+% therefore \caption won't work
+
+%\newcounter{figure}
+\setcounter{figure}{1}
+\newcommand{\pcaption}[1]{
+  \vspace{0.cm}
+  \begin{quote}
+    {{\sc Figure} \arabic{figure}: #1}
+  \end{quote}
+  \vspace{1cm}
+  \stepcounter{figure}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                myfig                         %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \myfig - replacement for \figure
+% necessary, since in multicol-environment 
+% \figure won't work
+
+\newcommand{\myfig}[3][0]{
+\begin{center}
+  \vspace{0.10cm}
+  \includegraphics[width=#3\hsize,angle=#1]{#2}
+%  \nobreak\medskip
+\end{center}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%                mycaption                     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \mycaption - replacement for \caption
+% necessary, since in multicol-environment \figure and
+% therefore \caption won't work
+
+%\newcounter{figure}
+\setcounter{figure}{1}
+\newcommand{\mycaption}[1]{
+  \vspace{0.0cm}
+  \begin{quote}
+    {\small{#1}}
+  \end{quote}
+  \vspace{0cm}
+  \stepcounter{figure}
+}
+
+
+% MES DEFINITIONS DES COULEURS:
+\newrgbcolor{lcolor}{0. 0. 0.80}
+\newrgbcolor{gcolor1}{1. 1. 1.}
+\newrgbcolor{gcolor2}{.80 .80 1.}
+\newrgbcolor{gradbegin}{0 0 0.8}
+\newrgbcolor{gradend}{1 1 1}
+\newrgbcolor{lightblue}{0. 0. 0.80}
+\newrgbcolor{lightyellow}{1 1 0.}
+\newrgbcolor{customcolor}{1 0.75 0.}
+\newrgbcolor{customcolor2}{1 0.5 0.}
+\newrgbcolor{customcolor3}{0 0.8 0.2}
+\newrgbcolor{white}{1. 1. 1.}
+\newrgbcolor{whiteblue}{.80 .80 1.}
+\newrgbcolor{mycyan}{.20 .60 .60}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Begin of Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\background{0.2 0.6 0.6}{1. 1. 1.}{0.5}
+
+\vspace*{2cm}
+
+%\newrgbcolor{lightblue}{0. 0. 0.80}
+%\newrgbcolor{white}{1. 1. 1.}
+%\newrgbcolor{whiteblue}{.80 .80 1.}
+
+%\newrgbcolor{darkred}{0.6 0 0}
+%\newrgbcolor{lightblue2}{0.2 0.2 1}
+%\newrgbcolor{lightblue}{0.5 0.5 1}
+%\newrgbcolor{white}{1. 1. 1.}
+%\newrgbcolor{whiteblue}{.80 .80 1.}
+%\newrgbcolor{mycyan}{rgb}{0.2,0.6,0.6}
+
+
+
+\begin{poster}
+%%%%%%%%%%%%%%%%%%%%%
+%%% Header
+%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{pcolumn}{0.98}
+  \begin{center}
+  \pbox{0.95\textwidth}{}{linewidth=2mm,framearc=0.3,linecolor=mycyan,shadowcolor=white,fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+ 
+%%% Logo
+  \begin{minipage}[l][9cm][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo_cnrs.eps}
+    \includegraphics[width=0.85\textwidth,angle=0]{./pict/logo_cnes2.eps}
+  \end{center}
+  \end{minipage}
+%%% Titre
+  \begin{minipage}[c][9cm][c]{0.78\textwidth}
+  \begin{center}
+    {\sc \huge \bf %%%TITLE
+    }\\[10mm]
+    {\Large Author1$^{1}$, Author2$^{1}$} \\[5mm]
+    {\large {$^{1}$ \it Labo} %\\
+%     %{$^{2}$ \it Departement of Oceanography, The Florida State University, Tallahassee, USA}\\
+    } 
+  \end{center}
+  \end{minipage}
+%%%Logo
+  \begin{minipage}[r][9cm][c]{0.1\textwidth}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth,angle=0]{logo1}
+  \end{center}
+  \end{minipage} 
+  }  %pbox
+  \end{center}
+\end{pcolumn}
+\end{center}
+ 
+ 
+%\vspace*{2cm}
+ 
+%%% Begin of Multicols-Environment
+\begin{multicols}{2}
+ 
+  \newcommand{\etal}{{\it et al.}}
+  \newcommand{\DegN}{$^{\circ}$N~}
+  \newcommand{\DegW}{$^{\circ}$W~}
+  \newcommand{\DegE}{$^{\circ}$E~}
+  \newcommand{\DegS}{$^{\circ}$S~}
+  
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%% Introduction
+  \begin{center}
+% \begin{pcolumn}{0.32}
+  \pbox{0.92\columnwidth}{30cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white, gradmidpoint=1.0,framesep=1em}{
+    \begin{center} 
+      { \bf \Large TITLE  \\[5mm]}%MOTIVATIONS 
+    \end{center}
+    {\large
+
+    } %large
+  } %pbox
+  \end{center}
+ 
+  \vspace*{0.1cm}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{center}
+% \begin{pcolumn}{0.32}
+  \pbox{0.92\columnwidth}{30cm}{linewidth=2mm,framearc=0.1,linecolor=mycyan, fillstyle=gradient,gradangle=0,gradbegin=white,gradend=white,gradmidpoint=1.0,framesep=1em}{
+    \begin{center}
+      {\sc \bf \Large TITLE\\[5mm]} 
+    \end{center} 
+ 
+    \vspace*{0.2cm}
+ 
+    {\large
+%   \begin{minipage}{0.49\linewidth} 
+  } %large
+  } %pbox
+  \end{center}
+ 
+\end{multicols}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+%%BIBLIO
+{\small
+   \bibliographystyle{./bst/jpo}
+% \bibliographystyle{alpha}
+  \bibliography{../biblio/biblio_th}
+}
+  
+\begin{center}
+  {\bf Laboratoire des Ecoulements G\'eophysiques et Industriels, 
+1023 rue de la piscine, Domaine Universitaire, 38400 Saint Martin d'Heres, FRANCE 
+e-mail: }
+\end{center}
+ 
+\end{poster}
+\end{document}
