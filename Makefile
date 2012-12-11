@@ -22,6 +22,18 @@ JC2 : Gaultier_JC2.tex
 	@rm -f *.aux *.bbl *.blg  #*.dvi *.log
 #	@mv poster.pdf poster_JC2.pdf 
 
+sama : Gaultier_sama.tex
+	@echo "compile poster"
+	@latex Gaultier_sama.tex
+	@bibtex Gaultier_sama
+	@latex Gaultier_sama.tex
+	@latex Gaultier_sama.tex
+	@echo "export in pdf"
+	@dvipdf Gaultier_sama.dvi Gaultier_sama.pdf
+	@echo "delete compilation files"
+	@rm -f *.aux *.bbl *.blg  #*.dvi *.log
+#	@mv poster.pdf poster_JC2.pdf 
+
 poster2.pdf : poster2.tex
 	@echo "compile poster"
 	@latex poster2.tex
